@@ -2,35 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="./src/images/logo.png">
+  <link rel="stylesheet" href="./src/styles/app.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
   
-  <title>Frontend Mentor | Todo app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <title>Todo App 🥶</title>
 </head>
-<body>
+<body class="body_wrapper">
+  <section class="main_wrapper">
+    <section class="img"></section>
 
-  Todo
+    <section class="main_body">
+      <!-- header -->
+      <span class="header">
+        <h1>TODO</h1>
+        <img src="./src/images/icon-sun.svg" />
+      </span>
 
-  <!-- Add dynamic number --> items left
+      <!-- create todo -->
+      <span class="create_todo">
+        <input type="checkbox" class="checkbox" name="create_todo">
 
-  All
-  Active 
-  Completed
+        <input type="text" placeholder="Create a new todo..." class="input_create"/>
+      </span>
 
-  Clear Completed
+      <main class="existing_todo">
+        <!-- created todo list-->
+        <span class="created_todo">
+          <input type="checkbox" class="checkbox" name="create_todo">
+        
+          <input type="text" placeholder="Jog around the park!" class="input_create" />
+        </span>
+        
+        <!-- footer navbar -->
+        <span class="nav">
+          <p>1 todo left</p>
+          <nav>
+            <a href="#">All</a>
+            <a href="#">Active</a>
+            <a href="#">Completed</a>
+          </nav>
+          <p>Clear Completed</p>
+        </span>
+      </main>
 
-  Drag and drop to reorder list
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+      <p>Drag and drop to reorder list
+        <br />
+        Coded by Ellahhh!❤️
+      </p>
+    </section>
+  </section>
 </body>
 </html>
