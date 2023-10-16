@@ -10,6 +10,9 @@ Thanks for checking out this front-end coding challenge.
 
 **To do this challenge, you need a good understanding of HTML, CSS and JavaScript.**
 
+## ER Diagram
+Create an ER diagram to show relationships between users and tasks - https://dbdiagram.io/d/To-Do-List-App-652d1630ffbf5169f0c4452d
+
 ## The challenge
 
 Your challenge is to build out this todo app and get it looking as close to the design as possible.
@@ -18,15 +21,15 @@ You can use any tools you like to help you complete the challenge. So if you've 
 
 Your users should be able to:
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Add new todos to the list
-- Mark todos as complete
-- Delete todos from the list
-- Filter by all/active/complete todos
-- Clear all completed todos
-- Toggle light and dark mode
-- **Bonus**: Drag and drop to reorder items on the list
+- Create UI interface for the todo app using EJS(or any template view that works for you)
+- Have authentication and authentication setup so users can only see their task, just  username and password
+- Write tests where possible
+- Handle errors globally and locally
+- Use logs and try to maintain a format
+- For the design of the UI, keep it simple
+- Host your application on any hosting platform
+- Use MongoDB as your database
+
 
 Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
 
