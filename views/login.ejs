@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" type="image/png" href="../public/images/logo.png">
+    <link rel="stylesheet" href="../public/styles/app.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="login_wrapper">
+        <main class="login_main">
+            <img src="../public/images/login.png"/>
+            <form class="login_form" action="/" method="POST">
+                <h1>Welcome Back!</h1>
+                <section>
+                    <span class="username">
+                        <label>Username</label>
+                        <input type="text" placeholder="Enter your Username" required name="username"/>
+                    </span>
+                    <span class="password">
+                        <label>Password</label>
+                        <input type="text" placeholder="Enter your Password" required name="password"/>
+                    </span>
+                </section>
+                
+                <button>Login</button>
+                <p>Do not have an account? <a href="/">Register!</a></p>
+            </form>
+        </main>
+    </section>
+</body>
+</html>

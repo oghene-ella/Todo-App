@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="icon" type="image/png" href="../public/images/logo.png">
+    <link rel="stylesheet" href="../public/styles/app.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section class="sign_up_wrapper">
+        <main class="sign_up_main">
+            <form class="sign_up_form" action="/" method="POST">
+                <h1>Hello There! 🤗</h1>
+                <section>
+                    <span class="fullname">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your Full Name" required name="fullname"/>
+                    </span>
+                    <span class="email">
+                        <label>Email</label>
+                        <input type="text" placeholder="Enter your Email" required name="email"/>
+                    </span>
+                    <span class="username">
+                        <label>Username</label>
+                        <input type="text" placeholder="Enter your Username" required name="username"/>
+                    </span>
+                    <span class="password">
+                        <label>Password</label>
+                        <input type="text" placeholder="Enter your Password" required name="password"/>
+                    </span>
+                </section>
+
+                <button>Sign Up</button>
+                <p>Already have an account? <a href="/login">Log In!</a></p>
+            </form>
+            <img src="../public/images/sign_up.png" />
+        </main>
+    </section>
+</body>
+
+</html>
