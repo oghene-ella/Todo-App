@@ -1,8 +1,29 @@
+// primary color gradient
+$color1: hsl(192, 100%, 67%);
+$color2: hsl(280, 87%, 65%);
+
+// colors
+$baseColor: #181823;
+$brightBlue: hsl(220, 98%, 61%);
+$lightGray: hsl(0, 0%, 98%);
+$darkBlue: hsl(235, 24%, 19%);
+$grayBlue: hsl(234, 39%, 85%);
+$grayBlueHover: hsl(236, 33%, 92%);
+
+// font family
+$fontFamily: 'Josefin Sans', sans-serif;
+
+// define mixin
+@mixin center {
+    position: absolute;
+    top: 25%;
+}
+
 .body_wrapper {
   padding: 0;
   margin: 0;
-  background-color: #181823;
-  font-family: "Josefin Sans", sans-serif;
+  background-color: $baseColor;
+  font-family: $fontFamily;
   width: 100%;
   height: 100%;
   color: white;
@@ -35,6 +56,27 @@
   top: 25%;
 }
 
+  .body_wrapper .main_wrapper .main_body .profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1{
+      font-size: 20px;
+    }
+    button{
+      background-color: $brightBlue;
+      border: none;
+      width: 20%;
+      height: 60%;
+      color: white;
+      border-radius: 7px;
+    }
+    button:hover{
+      background-color: $darkBlue;
+    }
+  }
+
 .body_wrapper .main_wrapper .main_body .header {
   display: flex;
   height: fit-content;
@@ -57,7 +99,7 @@
   display: flex;
   align-items: center;
   padding: 13px 20px;
-  background-color: hsl(235, 24%, 19%);
+  background-color: $darkBlue;
   gap: 15px;
   border-radius: 7px;
 }
@@ -74,19 +116,19 @@
   background-color: transparent;
   border: none;
   padding: 13px;
-  color: hsl(0, 0%, 98%);
+  color: $lightGray;
 }
 
 .body_wrapper .main_wrapper .main_body .create_todo .input_create::placeholder {
   font-size: 17px;
-  color: hsl(0, 0%, 98%);
+  color: $lightGray;
   opacity: 0.3;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo {
   height: fit-content;
   box-shadow: 0px 20px 25px #161621;
-  background-color: hsl(235, 24%, 19%);
+  background-color: $darkBlue;
   border-radius: 7px;
 }
 
@@ -94,7 +136,7 @@
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background-color: hsl(235, 24%, 19%);
+  background-color: $darkBlue;
   gap: 15px;
   border-top-right-radius: 7px;
   border-top-left-radius: 7px;
@@ -117,14 +159,14 @@
 
 .body_wrapper .main_wrapper .main_body .existing_todo .created_todo .input_create::placeholder {
   font-size: 18px;
-  color: hsl(234, 39%, 85%);
+  color: $grayBlue;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .nav {
   padding: 15px;
   display: flex;
   justify-content: space-between;
-  color: hsl(0, 0%, 98%);
+  color: $lightGray;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .nav p {
@@ -138,19 +180,19 @@
 
 .body_wrapper .main_wrapper .main_body .existing_todo .nav nav a {
   font-weight: bold;
-  color: hsl(0, 0%, 98%);
+  color: $lightGray;
   opacity: 0.3;
   text-decoration: none;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .nav nav a:first-child {
-  color: hsl(220, 98%, 61%);
+  color: $brightBlue;
   opacity: 0.7;
 }
 
 .body_wrapper .main_wrapper .main_body p {
   font-size: 15px;
-  color: hsl(0, 0%, 98%);
+  color: $lightGray;
   margin: 0;
   text-align: center;
   opacity: 0.6;
@@ -184,7 +226,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: $fontFamily;
 }
 
 .login_wrapper .login_main,
@@ -265,7 +307,7 @@
 .sign_up_wrapper .sign_up_main form button {
   padding-block: 15px;
   padding-inline: 5px;
-  background-color: hsl(220, 98%, 61%);
+  background-color: $brightBlue;
   border: none;
   color: white;
   border-radius: 4px;
@@ -286,7 +328,7 @@
 .login_wrapper .sign_up_main form p a,
 .sign_up_wrapper .login_main form p a,
 .sign_up_wrapper .sign_up_main form p a {
-  color: hsl(220, 98%, 61%);
+  color: $brightBlue;
   cursor: pointer;
   text-decoration: underline;
 }
