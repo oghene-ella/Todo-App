@@ -7,13 +7,12 @@ const ObjectId = Schema.ObjectId;
 const TaskSchema = new mongoose.Schema({
 	_id: {
 		type: String,
-		default: shortid.generate,
 	},
 	title: {
 		type: String,
 		required: [true, "must provide title"],
 		trim: true,
-		maxlength: [20, "name cannot be more than 30 characters"],
+		maxlength: [35, "name cannot be more than 35 characters"],
 	},
 	completed: {
 		type: Boolean,
