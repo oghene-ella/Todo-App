@@ -1,52 +1,23 @@
-const router = require("express").Router();
-const TodoModel = require("../models/taskModel");
+const express = require("express");
+const bodyParser = require("body-parser");
 
-router
-	.route("/")
-	.get((req, res) => {
-		TodoModel.find()
-			.then((item) => res.json(item))
-			.catch((err) => res.status(400).json("Error: " + err));
-	})
-	.delete((req, res) => {
-		TodoModel.deleteMany({ completed: true })
-			.then(() => res.json("successfully deleted!"))
-			.catch((err) => res.status(400).json("Error: " + err));
-	});
+const TodoRouter = express.Router();
 
-router
-	.route("/:id")
-	.get((req, res) => {
-		TodoModel.findOne({ id: req.params.id })
-			.then((item) => res.json(item))
-			.catch((err) => res.status(400).json("Error: " + err));
-	})
-	.patch((req, res) => {
-		TodoModel.findOneAndUpdate({ id: req.params.id }, { $set: req.body })
-			.then(() => res.json("successfully updated!"))
-			.catch((err) => res.status(400).json("Error: " + err));
-	})
-	.delete((req, res) => {
-		TodoModel.findOneAndDelete({ id: req.params.id })
-			.then(() => res.json("deleted successfully!"))
-			.catch((err) => res.status(400).json("Error: " + err));
-	});
+const TodoController = require("../controller/TodoController");
 
-router.route("/create").post((req, res) => {
-	const id = req.body.id;
-	const title = req.body.title;
-	const completed = req.body.completed;
+TodoRouter.use(bodyParser.json());
 
-	const newTodo = new TodoModel({
-		id,
-		title,
-		completed,
-	});
+TodoRouter.route("/").get(TodoController.getAllTodo);
 
-	newTodo
-		.save()
-		.then((item) => res.json(item))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
+TodoRouter.route("/:id").get(TodoController.getOneTodo);
 
-module.exports = router;
+TodoRouter.route("/").delete(TodoController.delManyTodo);
+
+TodoRouter.route("/:id").delete(TodoController.deleteOneTodo);
+
+TodoRouter.route("/:id").patch(TodoController.updateOneTodo);
+
+TodoRouter.route("/:id").post(TodoController.createTodo);
+
+
+module.exports = TodoRouter;
