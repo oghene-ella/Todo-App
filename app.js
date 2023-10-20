@@ -4,7 +4,8 @@ const connectMongo = require("./config/config");
 require("dotenv").config();
 
 const SignUpMiddleware = require("./middleware/signUpMiddleware");
-const LoginMiddleware = require("./middleware/loginMiddleware")
+const LoginMiddleware = require("./middleware/loginMiddleware");
+const todoRouter = require("./routes/todoRoute")
 
 // port
 const PORT = process.env.PORT;
@@ -45,6 +46,8 @@ app.post("/login", LoginMiddleware.login)
 app.get("/home", (req, res) => {
 	res.render("index");
 });
+
+app.use("/todo", todoRouter);
 
 // establish connection to mongodb
 connectMongo.connectMongo();
