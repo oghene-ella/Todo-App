@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const SignupModel = require("../models/signupModel");
 
-const signUp = async (req, res, next) => {
+const signUp = async (req, res) => {
 	const data = {
 		fullname: req.body.fullname,
 		email: req.body.email,
@@ -11,7 +11,7 @@ const signUp = async (req, res, next) => {
 
 	const existingUser = await SignupModel.findOne({ email: data.email });
 	if (existingUser) {
-		res.send("user already exist, please choose a different email");
+		res.render("sign_up");
 	} 
 	
 	else {
@@ -25,8 +25,6 @@ const signUp = async (req, res, next) => {
 
 		res.status(201).render("login");
 	}
-
-	next();
 };
 
 module.exports = { signUp };
