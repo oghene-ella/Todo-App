@@ -102,6 +102,16 @@ $fontFamily: 'Josefin Sans', sans-serif;
   background-color: $darkBlue;
   gap: 15px;
   border-radius: 7px;
+
+  .AddTodo{
+    background: $color2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+  }
+
+
 }
 
 .body_wrapper .main_wrapper .main_body .create_todo input[type=checkbox] {
@@ -130,6 +140,20 @@ $fontFamily: 'Josefin Sans', sans-serif;
   box-shadow: 0px 20px 25px #161621;
   background-color: $darkBlue;
   border-radius: 7px;
+
+  .edit_del {
+    display:flex;
+    gap: 10px;
+
+    .edit, 
+    .del {
+      background: $color2;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 5px 10px;
+    }
+  }
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .created_todo {

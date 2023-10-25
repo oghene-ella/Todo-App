@@ -81,6 +81,13 @@
   gap: 15px;
   border-radius: 7px;
 }
+.body_wrapper .main_wrapper .main_body .create_todo .AddTodo {
+  background: hsl(280, 87%, 65%);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+}
 
 .body_wrapper .main_wrapper .main_body .create_todo input[type=checkbox] {
   height: 1.5em;
@@ -108,6 +115,18 @@
   box-shadow: 0px 20px 25px #161621;
   background-color: hsl(235, 24%, 19%);
   border-radius: 7px;
+}
+.body_wrapper .main_wrapper .main_body .existing_todo .edit_del {
+  display: flex;
+  gap: 10px;
+}
+.body_wrapper .main_wrapper .main_body .existing_todo .edit_del .edit,
+.body_wrapper .main_wrapper .main_body .existing_todo .edit_del .del {
+  background: hsl(280, 87%, 65%);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .created_todo {
