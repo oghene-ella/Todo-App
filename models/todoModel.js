@@ -7,6 +7,11 @@ const ObjectId = Schema.ObjectId;
 const TaskSchema = new mongoose.Schema({
 	_id: {
 		type: String,
+		default: shortid.generate,
+	},
+	userId: {
+		type: String,
+		ref: "users",
 	},
 	title: {
 		type: String,
@@ -14,12 +19,13 @@ const TaskSchema = new mongoose.Schema({
 		trim: true,
 		maxlength: [35, "name cannot be more than 35 characters"],
 	},
-	completed: {
-		type: Boolean,
+	status: {
+		type: String,
+		enum: ["pending", "completed"],
 		default: false,
 	},
 });
 
-const TodoModel = mongoose.model("todo", TaskSchema);
+const TodoModel = mongoose.model("todos", TaskSchema);
 
 module.exports = TodoModel;
