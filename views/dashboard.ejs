@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" href="../public/images/logo.png">
+  <link rel="stylesheet" href="../public/styles/app.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <title>Todo App 🥶</title>
+</head>
+<body class="body_wrapper">
+  <section class="main_wrapper">
+    <section class="img"></section>
+
+    <form class="main_body">
+
+      <!-- name and logout button -->
+      <span class="profile">
+        <h1>Hello Ellahhh</h1>
+        <button>Logout</button>
+      </span>
+
+      <!-- header -->
+      <span class="header">
+        <h1>TODO</h1>
+        <img src="../public/images/icon-sun.svg" />
+      </span>
+
+      <!-- create todo -->
+      <span class="create_todo">
+        <input type="checkbox" class="checkbox" name="create_todo">
+
+        <input type="text" placeholder="Create a new todo..." class="input_create"/>
+
+        <button class="AddTodo">Add</button>
+      </span>
+
+      <main class="existing_todo">
+        <!-- created todo list-->
+        <span class="created_todo">
+          <input type="checkbox" class="checkbox" name="create_todo">
+        
+          <input type="text" placeholder="Jog around the park!" class="input_create" />
+
+          <span class="edit_del">
+            <button class="edit">Edit </button>
+            <button class="del">Del </button>
+          </span>
+        </span>
+        
+        <!-- footer navbar -->
+        <span class="nav">
+          <p>1 todo left</p>
+          <nav>
+            <a href="#">All</a>
+            <a href="#">Pending</a>
+            <a href="#">Completed</a>
+          </nav>
+          <p>Clear Completed</p>
+        </span>
+      </main>
+
+      <p>Drag and drop to reorder list
+        <br />
+        Coded by Ellahhh!❤️
+      </p>
+    </form>
+  </section>
+</body>
+</html>
