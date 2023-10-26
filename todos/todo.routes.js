@@ -2,32 +2,13 @@ const express = require("express");
 const Router = express.Router()
 const cookieParser = require("cookie-parser");
 
-const CookieAuth = require("../cookieAuth/Auth")
+const CookieAuth = require("../cookieAuth/Auth");
+const taskService = require("");
 
 Router.use(cookieParser());
 
 Router.get("/", async (req, res) => {
-	const query = req.query;
-	const user = res.locals.user || null;
-    
-	const response = await taskService.getTasks(user, query);
-
-	if (response.code == 404) {
-		console.log(user);
-		res.render("dashboard", {
-			user: user,
-			tasks: response.tasks,
-			message: response.message,
-		});
-	} else if (response.code == 409) {
-		res.redirect("/404");
-	} else {
-		res.render("dashboard", {
-			user: response.user,
-			tasks: response.tasks,
-			message: response.message,
-		});
-	}
+	const response = await taskService.getTasks();
 });
 
 Router.use(CookieAuth.CookieAuth);
