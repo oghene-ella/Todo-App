@@ -23,7 +23,6 @@ const createTodo = async (user, req_body) => {
         };
     }
     catch(err) {
-        console.log(err)
         return {
             message:
                 "Something went wrong while creating. Go back to your dashboard",
@@ -34,47 +33,52 @@ const createTodo = async (user, req_body) => {
     }
 };
 
-const deleteTodo = async ({ todoId, user }) => {
+const deleteTodo = async (user, req_id) => {
 	try {
-        if (!todoId) {
-            return {
-                statusCode: 422,
-                message: "Delete a Task",
-                success: false,
-            };
-        }
+		if (!req_id) {
+			return {
+				statusCode: 422,
+				message: "No task to Delete",
+				success: false,
+			};
+		}
 
-        const deleteTodo = await TodoModel.findByIdAndDelete({todoId});
+		const deleteTodo = await TodoModel.findByIdAndDelete({
+			_id: req_id._id,
+		});
 
-        if (!deleteTodo){
-            return {
-                statusCode: 406,
-                message: "Unable to delete Todo",
-                success: false,
-            };
-        }
+        console.log(deleteTodo);
 
-        const TodoList = await TodoModel.find({ userId: user._id });
-        return {
-            statusCode: 200,
-            message: "Todo deleted successfully",
-            TodoList,
-            user,
-        };
-    } catch (err) {
-        return {
-            statusCode: 409,
-            message: "Something went wrong with deleting the todo, try again later.",
-            err,
-            success: false,
-        }
-    }
+		if (!deleteTodo) {
+			return {
+				statusCode: 406,
+				message: "Unable to delete Todo",
+				success: false,
+			};
+		}
+
+		const TodoList = await TodoModel.find({ userId: user._id });
+
+		return {
+			statusCode: 200,
+			message: "Todo deleted successfully",
+			success: true,
+			TodoList,
+		};
+
+	} catch (err) {
+		console.log("del error: ", err);
+		return {
+			statusCode: 409,
+			message: "Something went wrong with deleting the todo, try again later.",
+			err,
+			success: false,
+		};
+	}
 };
 
 const getTodo = async (user) => {
-    console.log("welcome");
     try {
-        console.log("odili");
         const todo = await TodoModel.find({ userId: user._id });
 
         console.log("my todo", todo);
@@ -114,7 +118,7 @@ const getTodo = async (user) => {
     }
 }
 
-const updateTodo = async ({ _id, todo, status, userId }) => {
+const updateTodo = async ({ status, user }) => {
     try {
         if (!todo) {
             return {
@@ -124,17 +128,15 @@ const updateTodo = async ({ _id, todo, status, userId }) => {
             }
         }
 
-        const updateTodo = await TodoModel.findByIdAndUpdate(_id, {
-            todo: todo,
-            status: status,
-            userId: userId
+        const updateTodo = await TodoModel.findByIdAndUpdate(user._id, {
+            status: user.status,
         })
 
         if (!updateTodo){
             return {
                 statusCode: 406,
                 message: "Unable to Update Todo",
-                sucess: false,
+                success: false,
             }
         }
 
@@ -142,7 +144,6 @@ const updateTodo = async ({ _id, todo, status, userId }) => {
             statusCode: 204,
             message: "Todo has been Updated Successfully",
             updateTodo: [updateTodo],
-            userId
         }
     }
     catch (err) {

@@ -48,19 +48,18 @@
         
           <p class="input_create" ><%= todo.title%></p>
 
-          <span class="edit_del">
-            <button class="edit">Edit </button>
+          <form class="edit_del" action="/dashboard/del/:<%=todo._id%>" method="POST">
             <button class="del">Del </button>
-          </span>
+          </form>
         </span>
         <% }); %>
         
         <!-- footer navbar -->
         <span class="nav">
-          <p>1 todo left</p>
+          <p><%= todos.length %> todo left</p>
           <nav>
             <a href="#">All</a>
-            <a href="#">Pending</a>
+            <a href="/pending">Pending</a>
             <a href="#">Completed</a>
           </nav>
         </span>

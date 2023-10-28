@@ -68,12 +68,13 @@ body {
 
     h1{
       font-size: 20px;
+      text-transform: capitalize;
     }
     a{
       background-color: $brightBlue;
       border: none;
       width: 20%;
-      height: 60%;
+      padding: 10px;
       color: white;
       border-radius: 7px;
       text-decoration: none;
@@ -188,6 +189,7 @@ body {
   background-color: transparent;
   border: none;
   padding: 15px;
+  text-align: left;
 }
 
 .body_wrapper .main_wrapper .main_body .existing_todo .created_todo .input_create::placeholder {

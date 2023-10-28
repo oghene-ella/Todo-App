@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const CookieAuth = require("../cookieAuth/Auth")
 
 Router.use(cookieParser());
+Router.use(CookieAuth.CookieAuth);
 
 Router.post("/signup", async (req, res) => {
     const { fullname, password, email, username } = req.body;
@@ -21,7 +22,6 @@ Router.post("/signup", async (req, res) => {
     }
 
     else {
-        console.log("hello!");
         res.redirect('/login');
     }
 })
