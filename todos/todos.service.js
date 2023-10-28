@@ -43,8 +43,10 @@ const deleteTodo = async (user, req_id) => {
 			};
 		}
 
-		const deleteTodo = await TodoModel.findByIdAndDelete({
-			_id: req_id._id,
+        console.log(req_id);
+        
+		const deleteTodo = await TodoModel.findOneAndDelete({
+			_id: req_id
 		});
 
         console.log(deleteTodo);
@@ -83,18 +85,19 @@ const getTodo = async (user) => {
 
         console.log("my todo", todo);
 
-        if (!user) {
-            return {
-                statusCode: 404,
-                message: "You are an Unauthorized User",
-            };
-        }
+        // if (!user) {
+        //     return {
+        //         statusCode: 404,
+        //         message: "You are an Unauthorized User",
+        //     };
+        // }
 
         if (todo.length === 0) {
             return {
-                statusCode: 404,
+                statusCode: 200,
                 message: "There are no Todo's",
-                todo: null,
+                todo: todo,
+                user,
             };
         }
 
@@ -107,6 +110,7 @@ const getTodo = async (user) => {
                 user,
             };
         }
+
     } catch (error) {
         return {
             statusCode: 409,
@@ -156,9 +160,35 @@ const updateTodo = async ({ status, user }) => {
     }
 };
 
-module.exports = { 
-    createTodo, 
-    deleteTodo,
-    getTodo,
-    updateTodo,
+const getCompletedTodo = async (userId) => {
+    const todo = await TodoModel.find({userId, status: "completed"});
+    return{
+        statusCode: 200,
+        success: true,
+        message: "Completed Todos fetched successfully",
+        data: {
+            todo
+        }
+    };
+}
+
+const getPendingTodo = async (userId) => {
+	const todo = await TodoModel.find({ userId, status: "pending" });
+	return {
+		statusCode: 200,
+		success: true,
+		message: "Completed Todos fetched successfully",
+		data: {
+			todo,
+		},
+	};
+};
+
+module.exports = {
+	createTodo,
+	deleteTodo,
+	getTodo,
+	updateTodo,
+	getCompletedTodo,
+	getPendingTodo,
 };

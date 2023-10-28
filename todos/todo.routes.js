@@ -29,12 +29,40 @@ Router.get("/", async (req, res) => {
     }
 });
 
+Router.get("/dashboard/completed", async (req, res) => {
+    const userId = res.locals.user;
+
+    const response = await todoService.getCompletedTodo(userId);
+
+    res.render("dashboard", {
+			user: res.locals.user,
+			todo: response.data.todo,
+		});
+
+    console.log({ user: req.user });
+    console.log(response);
+})
+
+Router.get("/dashboard/pending", async (req, res) => {
+	const userId = res.locals.user.id;
+
+	const response = await todoService.getPendingTodo(userId);
+
+	res.render("dashboard", {
+		user: res.locals.user,
+		todo: response.data.todo,
+	});
+
+	console.log({ user: req.user });
+	console.log(response);
+});
+
 Router.post("/add", async (req, res) => {
     const req_body = req.body;
     const user = res.locals.user
 	const response = await todoService.createTodo(user, req_body);
 
-    if(response.statusCode == 409){
+    if(response.statusCode == 422){
         res.redirect("/404")
     }
 
@@ -42,16 +70,19 @@ Router.post("/add", async (req, res) => {
         res.redirect("/404");
     }
 
-    else if (response.statusCode == 200){
+    else if (response.statusCode == 201){
         res.redirect("/dashboard")
     }
 
 });
 
 Router.post("/del/:req_id", async (req, res) => {
-	const req_id = req.params.id;
+	const req_id = req.params.req_id;
+
+    console.log("req id", req_id);
+
 	const user = res.locals.user;
-	const response = await todoService.deleteTodo(req_id, user);
+	const response = await todoService.deleteTodo(user, req_id);
 
 	console.log("response: ", response);
 
