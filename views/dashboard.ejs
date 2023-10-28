@@ -48,7 +48,7 @@
         
           <p class="input_create" ><%= todo.title%></p>
 
-          <form class="edit_del" action="/dashboard/del/:<%=todo._id%>" method="POST">
+          <form class="edit_del" action="/dashboard/del/<%=todo._id%>" method="POST">
             <button class="del">Del </button>
           </form>
         </span>
@@ -59,8 +59,8 @@
           <p><%= todos.length %> todo left</p>
           <nav>
             <a href="#">All</a>
-            <a href="/pending">Pending</a>
-            <a href="#">Completed</a>
+            <a href="/dashboard/pending">Pending</a>
+            <a href="/dashboard/completed">Completed</a>
           </nav>
         </span>
       </main>
