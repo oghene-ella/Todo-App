@@ -40,6 +40,10 @@ app.get("/login", (req, res) => {
 	res.render("login");
 });
 
+// get method for the 404 page
+app.get("/404", (req, res) => {
+	res.render("404");
+});
 // // get method for the dashboard page
 // app.get("/dashboard", (req, res) => {
 // 	res.render("dashboard");
@@ -50,25 +54,27 @@ app.get("/login", (req, res) => {
 app.use("/users", UsersRouterHandler);
 app.use("/dashboard", TodoRouteHandler)
 
-// // error handling
-// app.use((err, req, res, next) => {
-// 	console.error(err.stack);
-// 	res.status(500).json({
-// 		data: null,
-// 		error: "Server Error",
-// 	});
-// });
+// logout
+app.get("/logout", (req, res) => {
+	res.clearCookie("jwt");
+	res.redirect("/");
+})
+
+// error handling
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).json({
+		data: null,
+		error: "Server Error",
+	});
+});
 
 // get other invalid routes
-// app.get("*", (req, res) => {
-// 	return res.status(404).json({
-// 		data: null,
-// 		error: "Route not found, try again",
-// 	});
-// });
+app.get("*", (req, res) => {
+	res.redirect("/404");
+});
 
 // establish connection to mongodb
-
 connectMongo.connectMongo();
 
 // listener
