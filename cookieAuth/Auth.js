@@ -7,6 +7,10 @@ const CookieAuth = ( req, res, next) => {
 
 	const validToken = jwt.verify(token, process.env.JWT_TOKEN)
 	console.log(validToken)
+
+	res.locals.user = validToken
+	console.log(res.locals.user);
+	
 	next();
 }
 module.exports = {
