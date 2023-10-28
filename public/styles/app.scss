@@ -19,6 +19,11 @@ $fontFamily: 'Josefin Sans', sans-serif;
     top: 25%;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 .body_wrapper {
   padding: 0;
   margin: 0;
@@ -64,15 +69,18 @@ $fontFamily: 'Josefin Sans', sans-serif;
     h1{
       font-size: 20px;
     }
-    button{
+    a{
       background-color: $brightBlue;
       border: none;
       width: 20%;
       height: 60%;
       color: white;
       border-radius: 7px;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: center;
     }
-    button:hover{
+    a:hover{
       background-color: $darkBlue;
     }
   }
@@ -362,7 +370,8 @@ $fontFamily: 'Josefin Sans', sans-serif;
   .login_wrapper .login_main img,
   .login_wrapper .sign_up_main img,
   .sign_up_wrapper .login_main img,
-  .sign_up_wrapper .sign_up_main img {
+  .sign_up_wrapper .sign_up_main img,
+  .index_wrapper .index_body img {
     display: none;
   }
   .login_wrapper .login_main form,
@@ -373,5 +382,166 @@ $fontFamily: 'Josefin Sans', sans-serif;
   }
 }
 
+
+// index ejs
+.index_wrapper{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: $fontFamily;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+
+  .inner {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+
+  .index_header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    nav{
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+
+      h1{
+        color: $brightBlue;
+        font-weight: bold;
+      }
+
+      span{
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        a{
+          text-decoration: none;
+          color: black;
+        }
+
+        a:first-child{
+          background: $brightBlue;
+          padding-inline: 20px;
+          padding-block: 8px;
+          color: white;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+
+        a:last-child{
+          background: $baseColor;
+          padding-inline: 20px;
+          padding-block: 8px;
+          color: white;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .index_body{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    margin: 0 auto;
+
+    .body_text{
+      display: flex;
+      flex-direction: column;
+
+      h1{
+        font-size: 40px;
+        margin: 0;
+
+        b{
+          color: $brightBlue;
+        }
+      }
+      p{
+        font-size: 17px;
+        line-height: 25px;
+      }
+
+      span{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        p{
+          color: rgba(0, 0, 0, 0.747);
+        }
+
+        a{
+          background-color: $brightBlue;
+          padding-inline: 30px;
+          padding-block: 10px;
+          border-radius: 5px;
+          color: white;
+          text-decoration: none;
+          width: fit-content;
+        }
+      }
+    }
+    img{
+      width: 50%;
+    }
+  }
+
+  footer{
+    background-color: $baseColor;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+  }
+}
+
+.error_wrapper{
+  section{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+
+    img{
+      width: 50%;
+      margin: 0 auto;
+    }
+    main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h1{
+        font-size: 40px;
+        text-align: center;
+      }
+
+      a{
+        text-align: center;
+        background-color: $brightBlue;
+        padding-inline: 30px;
+        padding-block: 10px;
+        text-decoration: none;
+        color: white;
+        border-radius: 7px;
+        width: 30%;
+
+      }
+    }
+  }
+}
 
 /*# sourceMappingURL=app.scss.map */
