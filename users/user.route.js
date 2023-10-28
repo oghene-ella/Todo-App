@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const CookieAuth = require("../cookieAuth/Auth")
 
 Router.use(cookieParser());
-Router.use(CookieAuth.CookieAuth);
 
 Router.post("/signup", async (req, res) => {
     const { fullname, password, email, username } = req.body;
@@ -13,6 +12,8 @@ Router.post("/signup", async (req, res) => {
     const response = await userService.SignUp({
         fullname, password, email, username
     })
+
+    console.log(response)
 
     if(response.statusCode == 409){
         res.redirect("/404")
@@ -28,10 +29,14 @@ Router.post("/signup", async (req, res) => {
 
 Router.post("/login", async (req, res) => {
     const { password, username } = req.body;
+    console.log(req.body)
+    console.log("I got here!");
 
     const response = await userService.Login({
         password, username
     })
+
+    console.log("response: ", response);
 
     if(response.statusCode == 404){
         res.redirect("/404")
