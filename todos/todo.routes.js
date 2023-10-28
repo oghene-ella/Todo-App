@@ -3,26 +3,83 @@ const Router = express.Router()
 const cookieParser = require("cookie-parser");
 
 const CookieAuth = require("../cookieAuth/Auth");
-const taskService = require("");
+const todoService = require("./todos.service");
 
 Router.use(cookieParser());
 
+Router.use(CookieAuth.CookieAuth);
+
 Router.get("/", async (req, res) => {
-	const response = await taskService.getTasks();
+    const user = res.locals.user
+	const response = await todoService.getTodo(user);
+
+    if(response.statusCode == 409){
+        // console.log("hey");
+        // res.json({
+        //     todo: null,
+        //     message: response.message
+        // });
+        res.redirect("/404")
+    }
+
+    else if(response.statusCode == 404) {
+        // console.log("hello");
+        // res.json({
+		// 	todo: null,
+        //     message: response.message
+		// });
+        res.redirect("/404");
+    }
+
+    else if (response.statusCode == 200){
+        // console.log("bye");
+        // // res.send("say something");
+        // res.json({
+        //     user: response.user,
+        //     message: "hi",
+       // })
+
+        console.log(response.todo)
+        res.render("dashboard", {todos: response.todo, user: response.user});
+
+    }
 });
 
-Router.use(CookieAuth.CookieAuth);
-Router.get("/todos", async (req, res) => {
-    // const { todo, username } = req.body;
-    // render dashboard
+Router.post("/add", async (req, res) => {
+    const req_body = req.body;
+    const user = res.locals.user
+	const response = await todoService.createTodo(user, req_body);
 
-    // const response = await userService.Login({
-    //     password,
-    //     username,
-    // });
+    console.log(response);
 
+    if(response.statusCode == 409){
+        // console.log("hey");
+        // res.json({
+        //     todo: null,
+        //     message: response.message
+        // });
+        res.redirect("/404")
+    }
 
-	res.render("dashboard");
+    else if(response.statusCode == 404) {
+        // console.log("hello");
+        // res.json({
+		// 	todo: null,
+        //     message: response.message
+		// });
+        res.redirect("/404");
+    }
+
+    else if (response.statusCode == 200){
+        // console.log("bye");
+        // // res.send("say something");
+        // res.json({
+        //     user: response.user,
+        //     message: "hi",
+       // })
+        res.redirect("/dashboard")
+    }
+
 });
 
 module.exports = Router;    

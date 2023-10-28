@@ -44,7 +44,7 @@ Router.post("/login", async (req, res) => {
 	} 
     else {
         res.cookie("jwt", response.token)
-        res.redirect("/dashboard/todos");
+        res.redirect("/dashboard");
 	}
 })
 

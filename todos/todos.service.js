@@ -1,8 +1,8 @@
 const TodoModel = require("../models/todoModel");
 
-const createTodo = async ({ todo, userId }) => {
+const createTodo = async (user, req_body) => {
     try {
-        if (!todo) {
+        if (!req_body) {
             return {
                 statusCode: 422,
                 message: "Add a Todo already!",
@@ -11,8 +11,8 @@ const createTodo = async ({ todo, userId }) => {
         }
 
         const newTodo = await TodoModel.create({
-            todo: todo,
-            userId: userId._id,
+            title: req_body.title,
+            userId: user._id,
         });
 
         return {
@@ -23,6 +23,7 @@ const createTodo = async ({ todo, userId }) => {
         };
     }
     catch(err) {
+        console.log(err)
         return {
             message:
                 "Something went wrong while creating. Go back to your dashboard",
@@ -70,16 +71,18 @@ const deleteTodo = async ({ todoId, user }) => {
     }
 };
 
-const getTodo = async ({userId, getBody }) => {
+const getTodo = async (user) => {
+    console.log("welcome");
     try {
-        const todo = await TodoModel.find({ userId: userId._id });
+        console.log("odili");
+        const todo = await TodoModel.find({ userId: user._id });
 
-        if (!userId) {
+        console.log("my todo", todo);
+
+        if (!user) {
             return {
                 statusCode: 404,
                 message: "You are an Unauthorized User",
-                tasks: false,
-                userId: null,
             };
         }
 
@@ -88,24 +91,16 @@ const getTodo = async ({userId, getBody }) => {
                 statusCode: 404,
                 message: "There are no Todo's",
                 todo: null,
-                getBody,
             };
         }
 
-        if (getBody.status == "pending") {
-            todo = todo.filter((theTodo) => theTodo.status == "pending");
-        }
-
-        if (getBody.status == "completed") {
-            todo = todo.filter((theTodo) => theTodo.status == "completed");
-        }
-
         if (todo.length != 0) {
+        console.log("chelsea");
             return {
                 statusCode: 200,
                 message: null,
                 todo,
-                userId,
+                user,
             };
         }
     } catch (error) {
@@ -113,7 +108,7 @@ const getTodo = async ({userId, getBody }) => {
             statusCode: 409,
             message:
                 "Something went wrong with getting the todo list, try again later.",
-            err,
+            error,
             success: false,
         };
     }
