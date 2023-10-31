@@ -160,45 +160,51 @@ const updateTodo = async ({ status, user }) => {
     }
 };
 
-const getCompletedTodo = async () => {
-    try {
-        const todo = await TodoModel.find({ status: "completed" });
+const getCompletedTodo = async (user) => {
+	try {
+		const todo = await TodoModel.find(
+			{ userId: user._id,
+			status: "completed" },
+		);
 
-        if (todo.length === 0) {
-            return {
-                statusCode: 200,
-                message: "There are no todo lists",
-                todo: todo,
-            };
-        }
+		if (todo.length === 0) {
+			return {
+				statusCode: 200,
+				message: "There are no todo lists",
+				todo: todo,
+				user,
+			};
+		}
 
-        if (todo.length != 0) {
-            return {
-                statusCode: 200,
-                message: null,
-                todo: todo,
-            };
-        }
-    } catch (error) {
-        return {
-            statusCode: 409,
-            message:
-                "Something went wrong with getting the todo list, try again later.",
-            error,
-            success: false,
-        };
-    }
+		if (todo.length != 0) {
+			return {
+				statusCode: 200,
+				message: null,
+				todo: todo,
+				user,
+			};
+		}
+	} catch (error) {
+		return {
+			statusCode: 409,
+			message:
+				"Something went wrong with getting the todo list, try again later.",
+			error,
+			success: false,
+		};
+	}
 };
 
-const getPendingTodo = async () => {
+const getPendingTodo = async (user) => {
     try {
-			const todo = await TodoModel.find({ status: "pending" });
+			const todo = await TodoModel.find({userId: user._id, status: "pending" });
 
 			if (todo.length === 0) {
 				return {
 					statusCode: 200,
 					message: "There are no todo lists",
 					todo: todo,
+					user,
 				};
 			}
 
@@ -207,6 +213,7 @@ const getPendingTodo = async () => {
 					statusCode: 200,
 					message: null,
 					todo: todo,
+                    user,
 				};
 			}
 		} catch (error) {
@@ -247,11 +254,11 @@ const CompletedTodo = async (user, req_id) => {
 
 		const TodoList = await TodoModel.find({ userId: user._id });
 
-		console.log("blog list: ", TodoList);
+		console.log("todo list: ", TodoList);
 
 		return {
 			statusCode: 200,
-			message: "Blog completed successfully",
+			message: "Todo completed successfully",
 			success: true,
 			TodoList,
 		};

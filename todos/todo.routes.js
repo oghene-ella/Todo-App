@@ -29,10 +29,9 @@ Router.get("/", async (req, res) => {
     }
 });
 
-
-
 Router.get("/completed", async (req, res) => {
-	const response = await todoService.getCompletedTodo();
+    const user = res.locals.user;
+	const response = await todoService.getCompletedTodo(user);
 
 	console.log("response single", response);
 
@@ -41,12 +40,14 @@ Router.get("/completed", async (req, res) => {
 	} else if (response.statusCode == 200) {
 		res.render("dashboard", {
 			todos: response.todo,
+			user: response.user,
 		});
 	}
 });
 
 Router.get("/pending", async (req, res) => {
-	const response = await todoService.getPendingTodo();
+    const user = res.locals.user;
+	const response = await todoService.getPendingTodo(user);
 
 	console.log("response single", response);
 
@@ -55,6 +56,7 @@ Router.get("/pending", async (req, res) => {
 	} else if (response.statusCode == 200) {
 		res.render("dashboard", {
 			todos: response.todo,
+			user: response.user,
 		});
 	}
 });
@@ -100,6 +102,7 @@ Router.post("/del/:req_id", async (req, res) => {
 
 Router.post("/completed/:req_id", async (req, res) => {
 	const req_id = req.params.req_id;
+    
 
 	const user = res.locals.user;
 	const response = await todoService.CompletedTodo(user, req_id);
