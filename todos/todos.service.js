@@ -160,29 +160,112 @@ const updateTodo = async ({ status, user }) => {
     }
 };
 
-const getCompletedTodo = async (userId) => {
-    const todo = await TodoModel.find({userId, status: "completed"});
-    return{
-        statusCode: 200,
-        success: true,
-        message: "Completed Todos fetched successfully",
-        data: {
-            todo
-        }
-    };
-}
+const getCompletedTodo = async () => {
+    try {
+        const todo = await TodoModel.find({ status: "completed" });
 
-const getPendingTodo = async (userId) => {
-	const todo = await TodoModel.find({ userId, status: "pending" });
-	return {
-		statusCode: 200,
-		success: true,
-		message: "Completed Todos fetched successfully",
-		data: {
-			todo,
-		},
-	};
+        if (todo.length === 0) {
+            return {
+                statusCode: 200,
+                message: "There are no todo lists",
+                todo: todo,
+            };
+        }
+
+        if (todo.length != 0) {
+            return {
+                statusCode: 200,
+                message: null,
+                todo: todo,
+            };
+        }
+    } catch (error) {
+        return {
+            statusCode: 409,
+            message:
+                "Something went wrong with getting the todo list, try again later.",
+            error,
+            success: false,
+        };
+    }
 };
+
+const getPendingTodo = async () => {
+    try {
+			const todo = await TodoModel.find({ status: "pending" });
+
+			if (todo.length === 0) {
+				return {
+					statusCode: 200,
+					message: "There are no todo lists",
+					todo: todo,
+				};
+			}
+
+			if (todo.length != 0) {
+				return {
+					statusCode: 200,
+					message: null,
+					todo: todo,
+				};
+			}
+		} catch (error) {
+			return {
+				statusCode: 409,
+				message:
+					"Something went wrong with getting the todo list, try again later.",
+				error,
+				success: false,
+			};
+		}
+};
+
+const CompletedTodo = async (user, req_id) => {
+	try {
+		if (!req_id) {
+			return {
+				statusCode: 422,
+				message: "No todo to Delete",
+				success: false,
+			};
+		}
+		console.log("todo id:", req_id);
+
+		const todoComplete = await TodoModel.findByIdAndUpdate(req_id, {
+			status: "completed",
+		});
+
+		console.log("todo", todoComplete);
+
+		if (!todoComplete) {
+			return {
+				statusCode: 406,
+				message: "Unable to publish Blog",
+				success: false,
+			};
+		}
+
+		const TodoList = await TodoModel.find({ userId: user._id });
+
+		console.log("blog list: ", TodoList);
+
+		return {
+			statusCode: 200,
+			message: "Blog completed successfully",
+			success: true,
+			TodoList,
+		};
+	} catch (err) {
+		console.log("del error: ", err);
+		return {
+			statusCode: 409,
+			message: "Something went wrong with deleting the todo, try again later.",
+			err,
+			success: false,
+		};
+	}
+};
+
 
 module.exports = {
 	createTodo,
@@ -191,4 +274,5 @@ module.exports = {
 	updateTodo,
 	getCompletedTodo,
 	getPendingTodo,
+	CompletedTodo,
 };
