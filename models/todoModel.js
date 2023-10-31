@@ -4,7 +4,7 @@ const shortid = require("shortid");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const TaskSchema = new mongoose.Schema({
+const TodoSchema = new mongoose.Schema({
 	_id: {
 		type: String,
 		default: shortid.generate,
@@ -26,6 +26,6 @@ const TaskSchema = new mongoose.Schema({
 	},
 });
 
-const TodoModel = mongoose.model("todos", TaskSchema);
+const TodoModel = mongoose.model("todos", TodoSchema);
 
 module.exports = TodoModel;
