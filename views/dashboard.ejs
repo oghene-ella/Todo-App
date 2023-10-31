@@ -44,11 +44,19 @@
         <!-- created todo list-->
         <% todos.forEach(function(todo, i) { %>
           <span class="created_todo">
-          <input type="checkbox" class="checkbox" name="create_todo">
-        
-          <p class="input_create" ><%= todo.title%></p>
+          <!-- <input type="checkbox" id="status_checkbox" class="checkbox" name="create_todo" data-id="<%= todo._id %>"> -->
 
-          <form class="edit_del" action="/dashboard/del/<%=todo._id%>" method="POST">
+          <form action="/dashboard/completed/<%=todo._id%>" method="POST">
+            <% if (todo.status !=='completed' ) { %>
+              <button style="background-color: green; color: white; border: none ; padding-inline: 12px; padding-block: 3px; border-radius: 4px; cursor: pointer;">Update</button>
+              <% } %>
+          </form>
+
+        
+          <p class="input_create" style="text-transform: capitalize;" ><%= todo.title%></p>
+
+          <form class="edit_del" style="display: flex; gap: 20px; align-items: center;" action="/dashboard/del/<%=todo._id%>" method="POST">
+            <p><%=todo.status%></p>
             <button class="del">Del </button>
           </form>
         </span>
@@ -58,7 +66,7 @@
         <span class="nav">
           <p><%= todos.length %> todo left</p>
           <nav>
-            <a href="#">All</a>
+            <a href="/dashboard">All</a>
             <a href="/dashboard/pending">Pending</a>
             <a href="/dashboard/completed">Completed</a>
           </nav>
@@ -71,5 +79,6 @@
       </p>
     </section>
   </section>
+
 </body>
 </html>
